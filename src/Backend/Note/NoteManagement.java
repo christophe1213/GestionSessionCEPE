@@ -5,8 +5,8 @@
 package Backend.Note;
 
 import Backend.Crud;
-import Backend.Ecole.Ecole;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,25 +18,44 @@ public class NoteManagement extends Crud {
             //les colones
             String[] colonnes={"num Elève","numéro matiere","anné scolaire","note"};
             String[] line={"numeleve","nummat","annescolaire","note"};
-            return super.liste("SELECT * FROM eleve order by numeleve ASC  ;", line,colonnes);
+            return super.liste("SELECT * FROM note  ;", line,colonnes);
                 
     }
     
      public Boolean insertion(Note note){
-          String[] list = {note.getNummeleve(),note.getNummat(),note.getAnneScolaire(),String.valueOf(note.getNote())};
-          String query="insert into note values (?,?,?,?);";   
-          return super.tableUpdate(query, list);
+      
+            String query="insert into note values (?,?,?,?);";   
+            ArrayList<Object> noteTraitement = new ArrayList<>();
+            
+          
+            noteTraitement.add(note.getNummeleve());
+            noteTraitement.add(note.getNummat());
+            noteTraitement.add(note.getAnneScolaire());
+            noteTraitement.add(note.getNote());
+          
+            return super.tableUpdate(query, noteTraitement);
+         
      }
      public Boolean update(Note note){
-         String[] list = {note.getNummeleve(),note.getNummat(),note.getAnneScolaire(),String.valueOf(note.getNote())};
-         String query="update note set annescolaire=?,note=? where numeleve=? and nummat=?;";
-         return super.tableUpdate(query, list);
+            
+            String query="update note set annescolaire=?,note=? where numeleve=? and nummat=?;";
+            ArrayList<Object> noteTraitement = new ArrayList<>();
+            noteTraitement.add(note.getAnneScolaire());
+            noteTraitement.add(note.getNote());
+            noteTraitement.add(note.getNummeleve());
+            noteTraitement.add(note.getNummat());
+            return super.tableUpdate(query, noteTraitement);
+        
      }
      
      public Boolean delete(Note note){
-         String[] list = {note.getNummeleve(),note.getNummat()};
-         String query="delete from note where numeleve=? and nummat=?;";
-         return super.tableUpdate(query, list);
+     
+            String query="delete from note where numeleve=? and nummat=?;";
+            ArrayList<Object> noteTraitement = new ArrayList<>();
+            noteTraitement.add(note.getNummeleve());
+            noteTraitement.add(note.getNummat());
+            return super.tableUpdate(query, noteTraitement);
+        
      }
     
 }

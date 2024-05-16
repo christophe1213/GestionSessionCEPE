@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,17 +20,21 @@ import javax.swing.table.DefaultTableModel;
  */
  public class Crud {
     
-      protected Connection con;
-      protected PreparedStatement ps ;
+      protected  Connection con ;
+      protected  PreparedStatement ps ;
+      private String url = "jdbc:postgresql://localhost:5432/gestion_session_cepe";
+      private String utilisateur = "postgres";
+      private String motDePasse = "azerty";
       
       
-      public DefaultTableModel  liste(String q,String l[],String c[])
+      public  DefaultTableModel  liste(String q,String l[],String c[])
       {
-           // String[] colonnes={"numEcole","design","adresse"};
             String[] line = new String[l.length];
             DefaultTableModel m = new DefaultTableModel(null, c);
+  
              try{
-                    con= Connection();
+            
+                    con = DriverManager.getConnection(url, utilisateur, motDePasse);
                     Statement statement = con.createStatement();
                     ResultSet resultSet = statement.executeQuery(q);
                     
@@ -50,57 +55,43 @@ import javax.swing.table.DefaultTableModel;
              return m;
       }
     
-      public boolean tableUpdate(String q,String l[]){
-           Boolean updateTable=false; 
-
-         try{
-        
-          con=Connection();   
-          ps=(PreparedStatement)con.prepareStatement(q);
-     
-          for(int i=0;i<l.length;i++){
-              if(i==0)ps.setString(i+1, l[i]);
-              else if(l[i].matches("[+-]?\\d*(\\.\\d+)?")){  
-                  System.out.println("C'est un nombre");
-                  ps.setInt(i+1, Integer.parseInt(l[i]));
-              }else{ 
-                  ps.setString(i+1, l[i]);
-                  System.out.println("C'est n'est pas nombre (ins2)");
-              }
-              
-          }
-          ps.executeUpdate();
-          System.out.println("Kaiza aty za");
-          updateTable=true;
-          con.close();
-                
-        } catch (SQLException e) {
-            System.out.println("Erreur de mise à jour2 d'ecole");
-            e.printStackTrace();
-        }
+      public Boolean tableUpdate(String q,ArrayList<Object>o){
          
-          return updateTable;
-      
-          
-      }
-      public Connection Connection(){
-        String url = "jdbc:postgresql://localhost:5432/gestion_session_cepe";
-        String utilisateur = "postgres";
-        String motDePasse = "azerty";
-        Connection connexion = null;
-        
-        
-        try {
-            // Tentative de connexion à la base de données
-            connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-             System.out.println("connection réussi !");
-            
+             Boolean update=false;
+                       
+            try{
+              
+                //con=Connection();
+                con = DriverManager.getConnection(url, utilisateur, motDePasse);
+                ps=(PreparedStatement)con.prepareStatement(q);
+     
              
-        } catch (SQLException e) {
-            //si il y a une echec de connection
-            System.out.println("Échec de la connexion !");
-            e.printStackTrace();
+               
+                for(int i=0;i<o.size();i++){
+                        Object element = o.get(i);
+                        if(element instanceof String){
+                            System.out.println(element+" est une chaine de caractère");
+                            String elt= (String) element;    
+                            ps.setString(i+1, elt);
+                        }else if(element instanceof Integer){
+                            int eltInt = (int) element;
+                           System.out.println(element+" est une entier");
+                           ps.setInt(i+1, eltInt);
+                       }else {
+                            System.out.println(element+" est une  Type inconue");
+                        }
+                    }
+                 ps.executeUpdate();
+                update=true;
+                con.close();
+                 
+              
+           } catch (SQLException e) {
+                    System.out.println("Erreur de mise à jour2 d'elve");
+                    e.printStackTrace();
         }
-        return connexion;
-    }
+          return update;
+      }
+  
+      
 }

@@ -14,9 +14,10 @@ public class Note {
     private String anneScolaire;
     private int note;
     
-    public Note(String nMat,String nElev, String annSco,int n){
-        nummat=nMat;
+    public Note(String nElev,String nMat, String annSco,int n){
+        
         numeleve=nElev;
+        nummat=nMat;
         anneScolaire=annSco;
         note=n;
     }

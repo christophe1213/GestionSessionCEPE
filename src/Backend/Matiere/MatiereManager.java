@@ -7,6 +7,7 @@ package Backend.Matiere;
 import Backend.Crud;
 import Backend.Ecole.Ecole;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,33 +15,43 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MatiereManager extends Crud {
     
+   
      public  DefaultTableModel liste(){
             //les colones
             String[] colonnes={"num Matière","design","coef"};
             String[] line={"nummat","designmat","coef"};
             return super.liste("SELECT * FROM matiere order by nummat ASC  ;", line,colonnes);
-                
+           // return f;    
     }
      
       public Boolean insertion(Matiere matiere){
-        // String[] list = new String[3];
-         
-          String[] list = {matiere.getNummat(),matiere.getDesign(),String.valueOf(matiere.getCoef())};
+        
           String query="insert into matiere values (?,?,?);";
         
-          return super.tableUpdate(query, list);
+           ArrayList<Object> matiereTraite = new ArrayList<>();
+           matiereTraite.add(matiere.getNummat());
+           matiereTraite.add(matiere.getDesign());
+           matiereTraite.add(matiere.getCoef());
+          return super.tableUpdate(query, matiereTraite);
      }
       
       public Boolean update(Matiere matiere){
-         String[] list = {matiere.getDesign(),String.valueOf(matiere.getCoef()),matiere.getNummat()};
-         String query="update matiere set designmat=?,coef=? where nummat=?;";
-         return super.tableUpdate(query, list);
+        
+           String query="update matiere set designmat=?,coef=? where nummat=?;";
+           ArrayList<Object> matiereTraite = new ArrayList<>();
+           matiereTraite.add(matiere.getDesign());
+           matiereTraite.add(matiere.getCoef());
+           matiereTraite.add(matiere.getNummat());
+          return super.tableUpdate(query, matiereTraite);
      }
      
      public Boolean delete(Matiere matiere){
-         String[] list = {matiere.getNummat()};
-         String query="delete from matiere where nummat=?;";
-         return super.tableUpdate(query, list);
+          
+            String query="delete from matiere where nummat=?;";
+            ArrayList<Object> matiereTraite = new ArrayList<>();
+        
+            matiereTraite.add(matiere.getNummat());
+            return super.tableUpdate(query, matiereTraite);
      }
 
 }
