@@ -7,6 +7,7 @@ package Backend.Note;
 import Backend.Crud;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -57,5 +58,15 @@ public class NoteManagement extends Crud {
             return super.tableUpdate(query, noteTraitement);
         
      }
+          public DefaultComboBoxModel selectionEleve(){
+            String query="SELECT numeleve from eleve;";
+            return super.selection(query, "numeleve"); 
+      }
+        public DefaultComboBoxModel selectionMat(){
+       
+            String query="SELECT nummat from matiere;";
+            return super.selection(query, "nummat"); 
+      }
+     
     
 }

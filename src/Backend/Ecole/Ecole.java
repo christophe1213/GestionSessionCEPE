@@ -11,13 +11,22 @@ public class Ecole {
     private String design;
     private String adresse;
     
-    public Ecole(String n, String d, String a )
+    public Ecole()
     {
-        numEcole=n;
-        design=d;
-        adresse=a;     
+        numEcole=" ";
+        design=" ";
+        adresse=" ";
+
     }
+    
+    //Get
     public String getnumEcole(){return numEcole;}
     public String getdesign(){return design;}
     public String getadresse(){return adresse;}
+    
+    //Set
+    public void setNumEcole(String n){numEcole=n;}
+    public void setDesign(String d){design=d;}
+    public void setAdresse(String a){adresse=a;}
+    
 }

@@ -26,13 +26,16 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        mainVues1 = new Vues.MainVues();
+        mainVues1 = new Vues.App();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1024, 720));
+
+        mainVues1.setMinimumSize(new java.awt.Dimension(1024, 720));
         getContentPane().add(mainVues1, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -71,7 +74,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog jDialog1;
-    private Vues.MainVues mainVues1;
+    private Vues.App mainVues1;
     // End of variables declaration//GEN-END:variables
 }
