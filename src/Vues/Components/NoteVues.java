@@ -18,7 +18,8 @@ public class NoteVues extends javax.swing.JPanel {
     /**
      * Creates new form NoteVues
      */
-    private NoteManagement noteTraitement = new NoteManagement();
+    private static NoteManagement noteTraitement = new NoteManagement();
+    private Note note = new Note();
     public NoteVues() {
         initComponents();
         jTable2.setModel(noteTraitement.liste());
@@ -209,31 +210,31 @@ public class NoteVues extends javax.swing.JPanel {
 
     private void Btn_AjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AjoutActionPerformed
         // TODO add your handling code here:
-        try{
-            Note note = new Note(jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),
-                                   jTextField3.getText(),Integer.parseInt(jSpinner1.getValue().toString()));
+      if(Integer.parseInt(jSpinner1.getValue().toString())<0||Integer.parseInt(jSpinner1.getValue().toString())>20){
+            JOptionPane.showInternalMessageDialog(null, "Le note doit être inferieurou egale a 20 et positive");
+      }else{ 
+            note.setAllAttribut(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString()
+                    ,jTextField3.getText(),Integer.parseInt(jSpinner1.getValue().toString()));
             if(noteTraitement.insertion(note)){
                 JOptionPane.showInternalMessageDialog(null, "Insertion réussi");
                 jTextField3.setText("");
                 jSpinner1.setValue(0);
                 jTable2.setModel(noteTraitement.liste());
+            }else{
+                JOptionPane.showInternalMessageDialog(null, "Echec d'insertion");
             }
-            
-            
-        }catch(Exception e){
-            JOptionPane.showInternalMessageDialog(null, "Echec d'insertion");
-            
-        }
-
-        
+      }
     }//GEN-LAST:event_Btn_AjoutActionPerformed
 
     private void Btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_updateActionPerformed
         // TODO add your handling code here:
-        try{
-                
-                 Note note = new Note(jComboBox1.getSelectedItem().toString(),jComboBox2.getSelectedItem().toString(),
-                                   jTextField3.getText(),Integer.parseInt(jSpinner1.getValue().toString()));
+     
+        if(Integer.parseInt(jSpinner1.getValue().toString())<0||Integer.parseInt(jSpinner1.getValue().toString())>20){
+            JOptionPane.showInternalMessageDialog(null, "Le note doit être inferieurou egale a 20 et positive");
+        }else{
+                note.setAllAttribut(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString()
+                                ,jTextField3.getText(),Integer.parseInt(jSpinner1.getValue().toString()));
+              
               if(noteTraitement.update(note)){
                     JOptionPane.showInternalMessageDialog(null, "Modification réussi");
                     jTextField3.setText("");
@@ -242,21 +243,18 @@ public class NoteVues extends javax.swing.JPanel {
               }else{
                   JOptionPane.showInternalMessageDialog(null, "Echec de modification");
               }
-              
-        }catch(Exception e){
-              // JOptionPane.showInternalMessageDialog(null, "Veuillez selection le table avant de modifier");   
-        }
+        }      
+    
     }//GEN-LAST:event_Btn_updateActionPerformed
 
     private void Btn_update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_update1ActionPerformed
         // TODO add your handling code here:
          try{
               int i = jTable2.getSelectedRow();
-              
+              note.setAllAttribut(jTable2.getModel().getValueAt(i, 0).toString(), jTable2.getModel().getValueAt(i, 1).toString()
+                                ,jTable2.getModel().getValueAt(i, 2).toString(),Integer.parseInt(jTable2.getModel().getValueAt(i,3).toString()));
               int message =  JOptionPane.showConfirmDialog(this, "Vous voulez le supprimer", "confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-              Note note= new Note(jTable2.getModel().getValueAt(i, 0).toString(),jTable2.getModel().getValueAt(i, 1).toString(),
-                                   jTable2.getModel().getValueAt(i, 2).toString(),Integer.parseInt(jTable2.getModel().getValueAt(i,3).toString()));
-               if(message==JOptionPane.YES_OPTION){  
+              if(message==JOptionPane.YES_OPTION){  
                     if(noteTraitement.delete(note)){
                           JOptionPane.showInternalMessageDialog(null, "Suppréssion  réussi");
                     
@@ -273,7 +271,8 @@ public class NoteVues extends javax.swing.JPanel {
 
     private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
         // TODO add your handling code here:
-        
+           //Eviter la modification du clé primaire
+     
         int i = jTable2.getSelectedRow();
               
                 jComboBox1.setSelectedItem(jTable2.getModel().getValueAt(i, 0).toString());
@@ -281,14 +280,20 @@ public class NoteVues extends javax.swing.JPanel {
                 jTextField3.setText(jTable2.getModel().getValueAt(i, 2).toString());
                 jSpinner1.setValue(Integer.parseInt(jTable2.getModel().getValueAt(i,3).toString()));
     }//GEN-LAST:event_jTable2MouseReleased
-
+    public static void l(){
+        System.out.print("Je suis dans eleve");
+    }
+    public static void UpdateData(){
+        jComboBox1.setModel(noteTraitement.selectionEleve());
+        jComboBox2.setModel(noteTraitement.selectionMat());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Ajout;
     private javax.swing.JButton Btn_update;
     private javax.swing.JButton Btn_update1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private static javax.swing.JComboBox<String> jComboBox1;
+    private static javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -9,8 +9,7 @@ import Backend.Matiere.Matiere;
 import javax.swing.JOptionPane;
 import Vues.Components.table.TableCustom;
 import Backend.Routeur;
-import java.util.ArrayList;
-import javax.swing.JPanel;
+import Vues.Components.NoteVues;
 
 public class MatiereVues extends javax.swing.JPanel {
     private MatiereManager matiereTraitement = new MatiereManager();
@@ -249,10 +248,10 @@ public class MatiereVues extends javax.swing.JPanel {
 
     private void AjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterActionPerformed
         // TODO add your handling code here:
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField5.setText("");
+        jTextField1.setEditable(true);
         route.Route(this, jPanel1);
+        jButton3.setText("Ajouter");
+        Titre_Action.setText("Insertion  du table de matière");
     }//GEN-LAST:event_AjouterActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -266,7 +265,10 @@ public class MatiereVues extends javax.swing.JPanel {
             route.Route(this, jPanel1);
 
             jButton3.setText("Modifier");
-            Titre_Action.setText("Modfication du l'eleve");
+            Titre_Action.setText("Modfication du table de matière");
+            jTextField1.setEditable(false);
+            
+  
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Veuillez selectioner avant de supprimer");
             System.out.println(e);
@@ -284,6 +286,7 @@ public class MatiereVues extends javax.swing.JPanel {
                 if(matiereTraitement.delete(matiere)){
                     JOptionPane.showInternalMessageDialog(null, "suppression réussi");
                     jTable1.setModel(matiereTraitement.liste());
+                    NoteVues.UpdateData();
                 }else{
                     JOptionPane.showInternalMessageDialog(null, "Echec supprésion");
                 }
@@ -306,7 +309,7 @@ public class MatiereVues extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       try{
+
        Matiere matiere = new Matiere(jTextField1.getText(),jTextField2.getText(),Integer.parseInt(jTextField5.getText()));
         if(jButton3.getText()=="Ajouter"){
                if(matiereTraitement.insertion(matiere)){
@@ -316,7 +319,7 @@ public class MatiereVues extends javax.swing.JPanel {
                     jTextField1.setText("");
                     jTextField2.setText("");
                     jTextField5.setText("");
-                    //route.Route(this, jPanel2);
+                    NoteVues.UpdateData();
         
             }else{
                 JOptionPane.showInternalMessageDialog(null, "Vérifier votre donné inserer");
@@ -330,14 +333,12 @@ public class MatiereVues extends javax.swing.JPanel {
                 jTextField5.setText("");
                 route.Route(this, jPanel2);
                 jTable1.setModel(matiereTraitement.liste());
+                NoteVues.UpdateData();
             }else {
                 JOptionPane.showInternalMessageDialog(null, "Echec de modificiation");
             }
 
         }
-       }catch(Exception e){
-                JOptionPane.showInternalMessageDialog(null, "Vérifier votre donné inserer");
-       }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -6,6 +6,7 @@ import Backend.Ecole.EcoleManager;
 import Backend.Ecole.Ecole;
 //VUES
 import Vues.Components.table.TableCustom;
+import Vues.Components.EleveVues;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -16,8 +17,7 @@ public class EcoleVues extends javax.swing.JPanel {
     private Routeur route = new Routeur();
     public EcoleVues() {
         initComponents();
-        jTable1.setModel(ecoleTraitement.liste());
-        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        init();
     }
 
     
@@ -225,7 +225,11 @@ public class EcoleVues extends javax.swing.JPanel {
 
         add(jPanel_upddate, "card3");
     }// </editor-fold>//GEN-END:initComponents
-
+    //Initialisation
+    public void init(){
+        jTable1.setModel(ecoleTraitement.liste());
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+    }
     private void btn_ajoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajoutActionPerformed
         // TODO add your handling code here:
         //Préparation pour le panel  updtate en panel d'insertion
@@ -234,13 +238,14 @@ public class EcoleVues extends javax.swing.JPanel {
         jTextField_design.setText("");
         jButton2.setText("Ajouter");
         jLabel_action.setText("Insertion école");
+        jTextField_numecole.setEditable(true);
         route.Route(this, jPanel_upddate);
     }//GEN-LAST:event_btn_ajoutActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //Creation du ecole
-        try{
+        
             
              ecole.setNumEcole(jTextField_numecole.getText());
              ecole.setDesign(jTextField_design.getText());
@@ -254,12 +259,13 @@ public class EcoleVues extends javax.swing.JPanel {
                         jTextField_design.setText("");
                         route.Route(this, jPanel_ecole);
                         jTable1.setModel(ecoleTraitement.liste());
+                        EleveVues.updateData();
                }else{
                   JOptionPane.showInternalMessageDialog(null, "Vérifier votre donné inserer"); 
                }
         //Action si on fait une modification
             }else if(jButton2.getText()=="Modifier"){
-                
+                jTextField_numecole.setEditable(false);
                 if(ecoleTraitement.update(ecole)){
                         JOptionPane.showInternalMessageDialog(null, "Modificiation  réussi");
                         jTextField_numecole.setText("");
@@ -267,14 +273,12 @@ public class EcoleVues extends javax.swing.JPanel {
                         jTextField_design.setText("");    
                         route.Route(this, jPanel_ecole);
                         jTable1.setModel(ecoleTraitement.liste());
+                        EleveVues.updateData();
                 }else {
                         JOptionPane.showInternalMessageDialog(null, "Echec de modificiation");
             }
         }
-        }catch(Exception e){
-            JOptionPane.showInternalMessageDialog(null, "Veuillez vérifier votre saisie");
-        
-        }      
+          
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -1,45 +1,47 @@
 package Vues.Components;
 
-
-
-
 import Backend.Routeur;
 import Backend.Eleve.EleveManagement;
 import Backend.Eleve.Eleve;
 import Vues.Components.table.TableCustom;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
+import Vues.Components.NoteVues;
 public class EleveVues extends javax.swing.JPanel {
 
-    private EleveManagement eleveTraitement  = new EleveManagement();
-    private Routeur route = new Routeur();
+    private static EleveManagement eleveTraitement  = new EleveManagement();
+    private Routeur route                    = new Routeur();
+    private Eleve eleve                      = new Eleve();
     public EleveVues() {
         initComponents();
+        init();
+    }
+    //Initialisation personnalisé
+    private void init(){
         jTable2.setModel(eleveTraitement.liste());
         TableCustom.apply(jScrollPane2, TableCustom.TableType.MULTI_LINE);
+        jComboBox_numecole.setModel(eleveTraitement.selection());
         route.Route(this, jPanel1);
-        String[] list = {"fd","fdfd"};
-        jComboBox1.addItem("fdf");
-        jComboBox1.setModel(eleveTraitement.selection());
-        
+        search();
+        NoteVues.l();
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jTextField_numeleve = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField_prenom = new javax.swing.JTextField();
+        jTextField_nom = new javax.swing.JTextField();
+        jComboBox_numecole = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_back = new javax.swing.JButton();
+        jButton_action = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -60,15 +62,6 @@ public class EleveVues extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Insertion d'Eleve");
 
-        jTextField1.setText("jTextField1");
-
-        jButton2.setText("Ajouter");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -84,34 +77,30 @@ public class EleveVues extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nom");
 
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1", "Item2", "Item23" }));
+        jComboBox_numecole.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox_numecole.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jComboBox_numecole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1", "Item2", "Item23" }));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Prénom");
 
-        jButton4.setBackground(new java.awt.Color(51, 102, 255));
-        jButton4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jButton4.setText("Retour");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton_back.setBackground(new java.awt.Color(51, 102, 255));
+        jButton_back.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jButton_back.setText("Retour");
+        jButton_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton_backActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(51, 102, 255));
-        jButton3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jButton3.setText("Ajouter");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton_action.setBackground(new java.awt.Color(51, 102, 255));
+        jButton_action.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jButton_action.setText("Ajouter");
+        jButton_action.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton_actionActionPerformed(evt);
             }
         });
 
@@ -122,34 +111,31 @@ public class EleveVues extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(jButton_back)
                         .addGap(135, 135, 135)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(35, 35, 35)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(81, 81, 81)))))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField_numeleve, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox_numecole, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(jButton_action, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(505, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -158,28 +144,26 @@ public class EleveVues extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jButton_back))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_numeleve, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_numecole, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(281, Short.MAX_VALUE))
+                    .addComponent(jTextField_prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(166, 166, 166)
+                .addComponent(jButton_action, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         add(jPanel2, "card4");
@@ -314,90 +298,99 @@ public class EleveVues extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-      route.Route(this, jPanel2);
-      jButton3.setText("Ajouter");
-      jLabel1.setText("Insertion du nouveau  éleve");
+        route.Route(this, jPanel2);
+        jButton_action.setText("Ajouter");
+        jLabel1.setText("Insertion du nouveau  éleve");
+        jTextField_numeleve.setEditable(true);
+        jComboBox_numecole.setEnabled(true);
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        System.out.print(jTextField1.getText());
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_backActionPerformed
         // TODO add your handling code here:
           route.Route(this, jPanel1);
           jTable2.setModel(eleveTraitement.liste());
          
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton_backActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actionActionPerformed
         // TODO add your handling code here:
-        Eleve eleve = new Eleve(jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jTextField2.getText(),jTextField3.getText());
-       if(jButton3.getText()=="Ajouter"){
+        //Eleve eleve = new Eleve(jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jTextField2.getText(),jTextField3.getText());
+        eleve.setNumEleve(jTextField_numeleve.getText());
+        eleve.setNumEcole(jComboBox_numecole.getSelectedItem().toString());
+        eleve.setNom(jTextField_nom.getText());
+        eleve.setPrenom(jTextField_prenom.getText());
+        
+        if(jButton_action.getText()=="Ajouter"){
             if(eleveTraitement.insertion(eleve)){
                 JOptionPane.showInternalMessageDialog(null, "Insertion réussi");
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
+                jTextField_numeleve.setText("");
+                jTextField_prenom.setText("");
+                jTextField_nom.setText("");
                 route.Route(this, jPanel1);
                 jTable2.setModel(eleveTraitement.liste());
+                NoteVues.UpdateData();
+                
             }else{
                 JOptionPane.showInternalMessageDialog(null, "Vérifier votre donné inserer");
             }
-        }else if(jButton3.getText()=="Modifier"){
+        }else if(jButton_action.getText()=="Modifier"){
 
             if(eleveTraitement.update(eleve)){
                 JOptionPane.showInternalMessageDialog(null, "Modificiation  réussi");
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
+                jTextField_numeleve.setText("");
+                jTextField_prenom.setText("");
+                jTextField_nom.setText("");
                 route.Route(this, jPanel1);
                 jTable2.setModel(eleveTraitement.liste());
+                NoteVues.UpdateData();
             }else {
                 JOptionPane.showInternalMessageDialog(null, "Echec de modificiation");
             }
             
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton_actionActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-       
-        int i = jTable2.getSelectedRow();
-        
-        jTextField1.setText(jTable2.getModel().getValueAt(i, 0).toString());
-        jComboBox1.setSelectedItem(jTable2.getModel().getValueAt(i, 1).toString());
-        jTextField3.setText(jTable2.getModel().getValueAt(i, 2).toString());
-        jTextField2.setText(jTable2.getModel().getValueAt(i, 3).toString());
-        route.Route(this, jPanel2);
-        
-        jButton3.setText("Modifier");
-        jLabel1.setText("Modfication du l'eleve");
-        
-      
+        try{
+            int i = jTable2.getSelectedRow();
+            jTextField_numeleve.setText(jTable2.getModel().getValueAt(i, 0).toString());
+            jTextField_numeleve.setEditable(false);
+            jComboBox_numecole.setSelectedItem(jTable2.getModel().getValueAt(i, 1).toString());
+            jComboBox_numecole.setEnabled(false);
+            jTextField_nom.setText(jTable2.getModel().getValueAt(i, 2).toString());
+            jTextField_prenom.setText(jTable2.getModel().getValueAt(i, 3).toString());
+            route.Route(this, jPanel2);
+            jButton_action.setText("Modifier");
+            jLabel1.setText("Modfication du l'eleve");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(jButton1, " Veuillez selection avant de modfifier ");
+        }      
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int i = jTable2.getSelectedRow();
-        jTextField1.setText(jTable2.getModel().getValueAt(i, 0).toString());
-        jComboBox1.setSelectedItem(jTable2.getModel().getValueAt(i, 1).toString());
-        jTextField3.setText(jTable2.getModel().getValueAt(i, 2).toString());
-        jTextField2.setText(jTable2.getModel().getValueAt(i, 3).toString());
-        int message =  JOptionPane.showConfirmDialog(this, "Vous voulez le supprimer", "confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(message==JOptionPane.YES_OPTION){  
-            Eleve eleve = new Eleve(jTextField1.getText(),jComboBox1.getSelectedItem().toString(),jTextField2.getText(),jTextField3.getText());  
-            if(eleveTraitement.delete(eleve)){
-                    JOptionPane.showInternalMessageDialog(null, "sppression réussi");
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
+        try{
+            int i = jTable2.getSelectedRow();
+            eleve.setNumEleve(jTable2.getModel().getValueAt(i, 0).toString());
+            eleve.setNumEcole(jTable2.getModel().getValueAt(i, 1).toString());
+            eleve.setNom(jTable2.getModel().getValueAt(i, 2).toString());
+            eleve.setPrenom(jTable2.getModel().getValueAt(i, 3).toString());
+            int message =  JOptionPane.showConfirmDialog(this, "Vous voulez le supprimer", "confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+            if(message==JOptionPane.YES_OPTION){  
+                
+                if(eleveTraitement.delete(eleve)){
+                    JOptionPane.showInternalMessageDialog(null, "suppression réussi");
                     jTable2.setModel(eleveTraitement.liste());
-                    
+                    NoteVues.UpdateData();
+                }
             }
-      }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this," Veuillez selection avant de supprimer ");
+        }
+       
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -414,7 +407,7 @@ public class EleveVues extends javax.swing.JPanel {
 
     private void input_searchCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_input_searchCaretPositionChanged
         // TODO add your handling code here:
-        System.out.print("dff");
+       ;
     }//GEN-LAST:event_input_searchCaretPositionChanged
 
     private void input_searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_input_searchKeyPressed
@@ -441,18 +434,37 @@ public class EleveVues extends javax.swing.JPanel {
     }//GEN-LAST:event_input_searchActionPerformed
 
     public void search(){
-        ;
+        
+        
+          input_search.getDocument().addDocumentListener(new DocumentListener() {
+           @Override
+           public void insertUpdate(DocumentEvent e) {
+               jTable2.setModel(eleveTraitement.search(input_search.getText()));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               jTable2.setModel(eleveTraitement.search(input_search.getText()));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              jTable2.setModel(eleveTraitement.search(input_search.getText()));
+            }
+        });
+    }
+    public static void updateData(){
+       jComboBox_numecole.setModel(eleveTraitement.selection());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField input_search;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton_action;
+    private javax.swing.JButton jButton_back;
+    private static javax.swing.JComboBox<String> jComboBox_numecole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -463,8 +475,8 @@ public class EleveVues extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField_nom;
+    private javax.swing.JTextField jTextField_numeleve;
+    private javax.swing.JTextField jTextField_prenom;
     // End of variables declaration//GEN-END:variables
 }

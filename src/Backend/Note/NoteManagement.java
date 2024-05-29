@@ -19,7 +19,7 @@ public class NoteManagement extends Crud {
             //les colones
             String[] colonnes={"num Elève","numéro matiere","anné scolaire","note"};
             String[] line={"numeleve","nummat","annescolaire","note"};
-            return super.liste("SELECT * FROM note  ;", line,colonnes);
+            return super.liste("SELECT * FROM note order by numeleve asc  ;", line,colonnes);
                 
     }
     
@@ -28,7 +28,7 @@ public class NoteManagement extends Crud {
             String query="insert into note values (?,?,?,?);";   
             ArrayList<Object> noteTraitement = new ArrayList<>();
             
-          
+            
             noteTraitement.add(note.getNummeleve());
             noteTraitement.add(note.getNummat());
             noteTraitement.add(note.getAnneScolaire());

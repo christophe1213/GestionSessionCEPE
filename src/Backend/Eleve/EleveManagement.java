@@ -78,7 +78,7 @@ public class EleveManagement extends Crud
      public DefaultTableModel Resultat(){
             String[] colonnes={"num Eleve","Nom","Prénom","ecole","moyenne"};
             String[] line={"numeleve","nom","prenom","design","moyenne"};
-            String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, sum(coef*note)/sum(coef)::float as Moyenne from note,matiere,eleve,ecole where "
+            String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, TO_CHAR(SUM(coef * note) / SUM(coef)::float, 'FM999999990.00') as Moyenne from note,matiere,eleve,ecole where "
                     + "   eleve.numeleve=note.numeleve and matiere.nummat=note.nummat and eleve.numecole = ecole.numecole "
                     + "   group by note.numeleve,eleve.numeleve,eleve.nom,eleve.prenom,ecole.design having sum(coef*note)/sum(coef)::float>9.75 order by Moyenne desc;";
             return super.liste(query, line, colonnes);
@@ -86,7 +86,7 @@ public class EleveManagement extends Crud
      public DefaultTableModel EleveEchec(){
           String[] colonnes={"num Eleve","Nom","Prénom","ecole","moyenne"};
           String[] line={"numeleve","nom","prenom","design","moyenne"};
-          String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, sum(coef*note)/sum(coef)::float as Moyenne from note,matiere,eleve,ecole where "
+          String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, TO_CHAR(SUM(coef * note) / SUM(coef)::float, 'FM999999990.00') as Moyenne from note,matiere,eleve,ecole where "
                     + "   eleve.numeleve=note.numeleve and matiere.nummat=note.nummat and eleve.numecole = ecole.numecole "
                     + "   group by note.numeleve,eleve.numeleve,eleve.nom,eleve.prenom,ecole.design having sum(coef*note)/sum(coef)::float<9.75 order by Moyenne desc;";
           return super.liste(query, line, colonnes);
@@ -94,19 +94,19 @@ public class EleveManagement extends Crud
      public DefaultTableModel EleveSucces6eme(){
           String[] colonnes={"num Eleve","Nom","Prénom","ecole","moyenne"};
           String[] line={"numeleve","nom","prenom","design","moyenne"};
-          String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, sum(coef*note)/sum(coef)::float as Moyenne from note,matiere,eleve,ecole where "
+          String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, TO_CHAR(SUM(coef * note) / SUM(coef)::float, 'FM999999990.00') as Moyenne from note,matiere,eleve,ecole where "
                     + "   eleve.numeleve=note.numeleve and matiere.nummat=note.nummat and eleve.numecole = ecole.numecole  "
                     + "   group by note.numeleve,eleve.numeleve,eleve.nom,eleve.prenom,ecole.design having sum(coef*note)/sum(coef)::float>12 order by Moyenne desc;";
           return super.liste(query, line, colonnes);
      }
-     public void pdfNOte(String n){
+     public void pdfNOte(String n,String p){
          
        Document document = new Document();
        String querry="select annescolaire,nom,prenom,design as ecole from eleve,ecole,note where"
                + " note.numeleve=eleve.numeleve and ecole.numecole=eleve.numecole and eleve.numeleve='"+n+"' limit 1 ";
         try {
             System.out.println("Creating PDF...");
-            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Thierry Christophe\\Desktop\\test.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(p+".pdf"));
             document.open();
             document.add(new Paragraph("Relevet de note \n."));
             
@@ -149,7 +149,7 @@ public class EleveManagement extends Crud
                     
                     document.add(table);
                     PdfPTable tableNote = new PdfPTable(2);
-                    querry="select sum(note*coef) as total,sum(note*coef)/sum(coef)::float as moyenne from matiere,note where"
+                    querry="select sum(note*coef) as total,TO_CHAR(SUM(coef * note) / SUM(coef)::float, 'FM999999990.00') as moyenne from matiere,note where"
                             + " matiere.nummat=note.nummat and note.numeleve='"+n+"';";     
                     con = DriverManager.getConnection(url, utilisateur, motDePasse);
                     statement = con.createStatement();
@@ -158,10 +158,10 @@ public class EleveManagement extends Crud
                       while(resultSet.next()){
                    
              
-                     tableNote.addCell(new PdfPCell(new Paragraph("Total")));
-                     tableNote.addCell(new PdfPCell(new Paragraph(resultSet.getString(1))));
-                     tableNote.addCell(new PdfPCell(new Paragraph("Moyenne")));
-                     tableNote.addCell(new PdfPCell(new Paragraph(resultSet.getString(2))));
+                        tableNote.addCell(new PdfPCell(new Paragraph("Total")));
+                        tableNote.addCell(new PdfPCell(new Paragraph(resultSet.getString(1))));
+                        tableNote.addCell(new PdfPCell(new Paragraph("Moyenne")));
+                        tableNote.addCell(new PdfPCell(new Paragraph(resultSet.getString(2))));
                       
                     }
                     document.add(tableNote);

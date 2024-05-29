@@ -24,7 +24,7 @@ public class App extends javax.swing.JPanel {
     }
     private void list(JList list){
             list.setBackground(new Color(0, 0, 0, 0));
-            list.setOpaque(false);
+            list.setOpaque(false);            
             
     }
     @SuppressWarnings("unchecked")
@@ -39,14 +39,14 @@ public class App extends javax.swing.JPanel {
         jList1 = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(204, 204, 204));
         setMinimumSize(new java.awt.Dimension(1024, 720));
         setPreferredSize(new java.awt.Dimension(1024, 720));
         setLayout(null);
 
         panelMenu1.setMaximumSize(new java.awt.Dimension(210, 860));
         panelMenu1.setMinimumSize(new java.awt.Dimension(210, 860));
-        panelMenu1.setPreferredSize(new java.awt.Dimension(210, 720));
+        panelMenu1.setPreferredSize(new java.awt.Dimension(2100, 720));
 
         jPanel2.setOpaque(false);
 
@@ -100,7 +100,7 @@ public class App extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jList1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +119,8 @@ public class App extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(panelMenu1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelMenu1Layout.setVerticalGroup(
             panelMenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,16 +128,21 @@ public class App extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         add(panelMenu1);
         panelMenu1.setBounds(0, 0, 220, 720);
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(720, 214));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(328000, 328000));
+        jPanel1.setMinimumSize(new java.awt.Dimension(830, 720));
+        jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new java.awt.CardLayout());
         add(jPanel1);
-        jPanel1.setBounds(228, 10, 920, 720);
+        jPanel1.setBounds(228, 0, 830, 720);
+        jPanel1.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
     private void menu(){
         list(jList1);

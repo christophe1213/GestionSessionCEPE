@@ -18,6 +18,11 @@ public class Ecole {
         adresse=" ";
 
     }
+    public Ecole(String n,String d,String a ){
+        numEcole=n;
+        design=d;
+        adresse=a; 
+    }
     
     //Get
     public String getnumEcole(){return numEcole;}

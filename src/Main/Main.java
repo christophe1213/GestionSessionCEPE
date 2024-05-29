@@ -29,9 +29,8 @@ public class Main extends javax.swing.JFrame {
         mainVues1 = new Vues.App();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1024, 720));
-
-        mainVues1.setMinimumSize(new java.awt.Dimension(1024, 720));
         getContentPane().add(mainVues1, java.awt.BorderLayout.CENTER);
 
         pack();

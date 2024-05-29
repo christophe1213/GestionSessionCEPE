@@ -44,7 +44,7 @@ import javax.swing.DefaultComboBoxModel;
                  
                          m.addRow(line);
                   }
-                    System.out.println("affichage2 d'ecole réussi+");
+                   
                     con.close();
     
               } catch (SQLException e) {
@@ -53,19 +53,13 @@ import javax.swing.DefaultComboBoxModel;
                }
              return m;
       }
-    
+      
       public Boolean tableUpdate(String q,ArrayList<Object>o){
          
-             Boolean update=false;
-                       
-            try{
-              
-          
+            Boolean update=false;                       
+            try{          
                 con = DriverManager.getConnection(url, utilisateur, motDePasse);
-                ps=(PreparedStatement)con.prepareStatement(q);
-     
-             
-               
+                ps=(PreparedStatement)con.prepareStatement(q);                         
                 for(int i=0;i<o.size();i++){
                         Object element = o.get(i);
                         if(element instanceof String){
@@ -92,7 +86,6 @@ import javax.swing.DefaultComboBoxModel;
           return update;
       }
     public DefaultComboBoxModel selection(String q,String l){
-        //String[] line = new String[l.length];
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel();
         try{
             
@@ -103,17 +96,13 @@ import javax.swing.DefaultComboBoxModel;
                  while(resultSet.next()){
                      model.addElement(resultSet.getString(l));
                   }
-                       
-                    System.out.println("Comnbo bOX REUSI");
                     con.close();
     
               } catch (SQLException e) {
                    System.out.println("Échec de combo box");
                    e.printStackTrace();
                }
-
-//          DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(line);
-          model.addElement("fd");
+        
         return model; 
       }
       
