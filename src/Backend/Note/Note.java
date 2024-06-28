@@ -3,11 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Backend.Note;
-
-/**
- *
- * @author Thierry Christophe
- */
+import Backend.Crud;
 public class Note {
     private String nummat;
     private String numeleve;
@@ -28,8 +24,14 @@ public class Note {
     public int getNote(){return note;}
     
     //Set
-    public void setNummat(String n){nummat=n;}
-    public void setNummeleve(String n){numeleve=n;}
+    public void setNummat(String n){
+     
+        nummat=n;
+    }
+    public void setNummeleve(String n){
+        numeleve=n;
+    
+    }
     public void setAnneScolaire(String a){anneScolaire=a;}
     public void setNote(int n){note=n;}
     

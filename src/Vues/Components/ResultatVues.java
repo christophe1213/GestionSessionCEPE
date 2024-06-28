@@ -13,10 +13,25 @@ public class ResultatVues extends javax.swing.JPanel {
     private EleveManagement eleveResultat  = new EleveManagement();
     public ResultatVues() {
         initComponents();
-        jTable1.setModel(eleveResultat.Resultat());
-        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        initCustom();
     }
-
+    public void initCustom(){
+        jTable2.setModel(eleveResultat.Resultat());
+        TableCustom.apply(jScrollPane2, TableCustom.TableType.MULTI_LINE);
+        jButton1.setBackground(Asset.theme);
+        jButton1.setFont(Asset.fontBtn);
+        jButton1.setForeground(Asset.ColorText);
+        jButton2.setBackground(Asset.theme);
+        jButton2.setFont(Asset.fontBtn);
+        jButton2.setForeground(Asset.ColorText);
+        jButton3.setBackground(Asset.theme);
+        jButton3.setFont(Asset.fontBtn);
+        jButton3.setForeground(Asset.ColorText);
+        jButton4.setBackground(Asset.theme);
+        jButton4.setFont(Asset.fontBtn);
+        jButton4.setForeground(Asset.ColorText);
+        setBackground(Asset.Backround);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,35 +42,19 @@ public class ResultatVues extends javax.swing.JPanel {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(720, 420));
-        setLayout(new java.awt.BorderLayout());
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(720, 420));
-        jPanel2.setLayout(null);
-
-        jButton3.setBackground(new java.awt.Color(51, 153, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Liste des élèves échoué");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton3);
-        jButton3.setBounds(400, 90, 170, 25);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,37 +69,25 @@ public class ResultatVues extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 130, 820, 430);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(720, 420));
+        setLayout(new java.awt.CardLayout());
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Liste admis en 6ème");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(720, 420));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton3.setBackground(new java.awt.Color(51, 153, 255));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Liste des élèves échoué");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2);
-        jButton2.setBounds(210, 90, 150, 25);
-
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Résultat de l'examen CEPE");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(210, 10, 460, 50);
-
-        jButton1.setBackground(new java.awt.Color(51, 153, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Relevet de note");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(620, 90, 170, 25);
 
         jButton4.setBackground(new java.awt.Color(51, 153, 255));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,17 +97,93 @@ public class ResultatVues extends javax.swing.JPanel {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4);
-        jButton4.setBounds(30, 90, 130, 25);
 
-        add(jPanel2, java.awt.BorderLayout.CENTER);
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Résultat de l'examen CEPE");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jButton2.setBackground(new java.awt.Color(51, 153, 255));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Liste admis en 6ème");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(51, 153, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Relevet de note");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton4)
+                .addGap(57, 57, 57)
+                .addComponent(jButton2)
+                .addGap(37, 37, 37)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(233, 233, 233))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton4)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap())
+        );
+
+        jPanel2.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable2MouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        add(jPanel2, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            int i = jTable1.getSelectedRow();
-               String id = jTable1.getValueAt(i, 0).toString();
+            int i = jTable2.getSelectedRow();
+               String id = jTable2.getValueAt(i, 0).toString();
                JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fileChooser.setAcceptAllFileFilterUsed(false);
@@ -131,7 +194,7 @@ public class ResultatVues extends javax.swing.JPanel {
                     File selectedFile = fileChooser.getSelectedFile();
                    
                     JOptionPane.showInternalMessageDialog(null, "Impression réssui");
-                    jTable1.setModel(eleveResultat.Resultat());
+                    jTable2.setModel(eleveResultat.Resultat());
             
                     System.out.print(selectedFile.getAbsolutePath());
                     eleveResultat.pdfNOte(id,selectedFile.getAbsolutePath());
@@ -145,21 +208,25 @@ public class ResultatVues extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        jTable1.setModel(eleveResultat.EleveSucces6eme());
+        jTable2.setModel(eleveResultat.EleveSucces6eme());
         jLabel1.setText("Liste des éléves admis en 6ème");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jTable1.setModel(eleveResultat.EleveEchec());
+        jTable2.setModel(eleveResultat.EleveEchec());
         jLabel1.setText("Liste des éléves échoué");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         jTable1.setModel(eleveResultat.Resultat());
+         jTable2.setModel(eleveResultat.Resultat());
          jLabel1.setText("Liste admis en cepe");
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -169,8 +236,11 @@ public class ResultatVues extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

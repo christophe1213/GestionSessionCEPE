@@ -16,9 +16,28 @@ public class MatiereVues extends javax.swing.JPanel {
     private Routeur route = new Routeur();
     public MatiereVues() {
         initComponents();
+        initCustom();
+        
+    
+    }
+    public void initCustom(){
         jTable1.setModel(matiereTraitement.liste());
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
-    
+        Ajouter.setBackground(Asset.theme);
+        Ajouter.setFont(Asset.fontBtn);
+        Ajouter.setForeground(Asset.ColorText);
+        jButton1.setBackground(Asset.theme);
+        jButton1.setFont(Asset.fontBtn);
+        jButton1.setForeground(Asset.ColorText);    
+        jButton2.setBackground(Asset.theme);
+        jButton2.setFont(Asset.fontBtn);
+        jButton2.setForeground(Asset.ColorText);
+        jButton3.setBackground(Asset.theme);
+        jButton3.setFont(Asset.fontBtn);
+        jButton3.setForeground(Asset.ColorText);
+        jButton5.setBackground(Asset.theme);
+        jButton5.setFont(Asset.fontBtn);
+        jButton5.setForeground(Asset.ColorText);    
     }
     
     /**
@@ -114,9 +133,9 @@ public class MatiereVues extends javax.swing.JPanel {
                         .addComponent(jButton2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(232, 232, 232)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(269, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +289,7 @@ public class MatiereVues extends javax.swing.JPanel {
             
   
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Veuillez selectioner avant de supprimer");
+            JOptionPane.showMessageDialog(null, "Veuillez selectioner avant modifier");
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -281,7 +300,7 @@ public class MatiereVues extends javax.swing.JPanel {
             int i = jTable1.getSelectedRow();
              Matiere matiere = new Matiere(jTable1.getModel().getValueAt(i, 0).toString(),jTable1.getModel().getValueAt(i, 1).toString()
                                             ,Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString()));
-            int message =  JOptionPane.showConfirmDialog(this, "Vous voulez le supprimer", "confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int message =  JOptionPane.showConfirmDialog(null, "Vous voulez le supprimer", "confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(message==JOptionPane.YES_OPTION){  
                 if(matiereTraitement.delete(matiere)){
                     JOptionPane.showInternalMessageDialog(null, "suppression réussi");
@@ -313,7 +332,7 @@ public class MatiereVues extends javax.swing.JPanel {
        Matiere matiere = new Matiere(jTextField1.getText(),jTextField2.getText(),Integer.parseInt(jTextField5.getText()));
         if(jButton3.getText()=="Ajouter"){
                if(matiereTraitement.insertion(matiere)){
-                    JOptionPane.showMessageDialog(null, "Insertion reusi");
+                    JOptionPane.showMessageDialog(this, "Insertion reusi");
                     System.out.println("Insertion réussi");
                     jTable1.setModel(matiereTraitement.liste());
                     jTextField1.setText("");
@@ -346,7 +365,9 @@ public class MatiereVues extends javax.swing.JPanel {
         // TODO add your handling code here:
         route.Route(this, jPanel2);
         jTable1.setModel(matiereTraitement.liste());
-
+        jTextField1.setText("");
+        jTextField2.setText("");            
+        jTextField5.setText("");
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

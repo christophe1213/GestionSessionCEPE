@@ -8,11 +8,13 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 import Vues.Components.NoteVues;
+import javax.swing.DefaultComboBoxModel;
 public class EleveVues extends javax.swing.JPanel {
 
     private static EleveManagement eleveTraitement  = new EleveManagement();
     private Routeur route                    = new Routeur();
     private Eleve eleve                      = new Eleve();
+    public static DefaultComboBoxModel<String> model = eleveTraitement.selection();
     public EleveVues() {
         initComponents();
         init();
@@ -22,9 +24,28 @@ public class EleveVues extends javax.swing.JPanel {
         jTable2.setModel(eleveTraitement.liste());
         TableCustom.apply(jScrollPane2, TableCustom.TableType.MULTI_LINE);
         jComboBox_numecole.setModel(eleveTraitement.selection());
+        jButton1.setBackground(Asset.theme);
+        jButton1.setFont(Asset.fontBtn);
+        jButton1.setForeground(Asset.ColorText);
+        jButton5.setBackground(Asset.theme);
+        jButton5.setFont(Asset.fontBtn);
+        jButton5.setForeground(Asset.ColorText);
+        jButton6.setBackground(Asset.theme);
+        jButton6.setFont(Asset.fontBtn);
+        jButton6.setForeground(Asset.ColorText);
+        jButton7.setFont(Asset.fontBtn);
+        jButton7.setBackground(Asset.theme);
+        jButton7.setForeground(Asset.ColorText);
+        jButton_action.setBackground(Asset.theme);
+        jButton_action.setFont(Asset.fontBtn);
+        jButton_action.setForeground(Asset.ColorText);
+        jButton_back.setBackground(Asset.theme);
+        jButton_back.setForeground(Asset.ColorText);
+        jButton_back.setFont(Asset.fontBtn);
+        
         route.Route(this, jPanel1);
         search();
-        NoteVues.l();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -53,9 +74,28 @@ public class EleveVues extends javax.swing.JPanel {
         jButton7 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(new java.awt.CardLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jPanel2AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -254,43 +294,42 @@ public class EleveVues extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(129, 129, 129))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(input_search, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton7)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton5)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(129, 129, 129))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(input_search, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton7)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5)
-                .addGap(35, 35, 35)
-                .addComponent(jButton6)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5)
-                    .addComponent(jButton1)
                     .addComponent(input_search, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(254, 254, 254))
+                    .addComponent(jButton7)
+                    .addComponent(jButton1)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(227, 227, 227))
         );
 
         add(jPanel1, "card3");
@@ -303,14 +342,16 @@ public class EleveVues extends javax.swing.JPanel {
         jLabel1.setText("Insertion du nouveau  éleve");
         jTextField_numeleve.setEditable(true);
         jComboBox_numecole.setEnabled(true);
-      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_backActionPerformed
         // TODO add your handling code here:
-          route.Route(this, jPanel1);
-          jTable2.setModel(eleveTraitement.liste());
-         
+        route.Route(this, jPanel1);
+        jTable2.setModel(eleveTraitement.liste());
+        jTextField_numeleve.setText("");
+        jTextField_prenom.setText("");
+        jTextField_nom.setText("");
+        jComboBox_numecole.setModel(eleveTraitement.selection());
     }//GEN-LAST:event_jButton_backActionPerformed
 
     private void jButton_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actionActionPerformed
@@ -320,8 +361,8 @@ public class EleveVues extends javax.swing.JPanel {
         eleve.setNumEcole(jComboBox_numecole.getSelectedItem().toString());
         eleve.setNom(jTextField_nom.getText());
         eleve.setPrenom(jTextField_prenom.getText());
-        
         if(jButton_action.getText()=="Ajouter"){
+            
             if(eleveTraitement.insertion(eleve)){
                 JOptionPane.showInternalMessageDialog(null, "Insertion réussi");
                 jTextField_numeleve.setText("");
@@ -343,6 +384,9 @@ public class EleveVues extends javax.swing.JPanel {
                 jTextField_nom.setText("");
                 route.Route(this, jPanel1);
                 jTable2.setModel(eleveTraitement.liste());
+               /*jComboBox_numecole.setEnabled(false);
+                jTextField_numeleve.setEditable(false);
+ */
                 NoteVues.UpdateData();
             }else {
                 JOptionPane.showInternalMessageDialog(null, "Echec de modificiation");
@@ -358,9 +402,10 @@ public class EleveVues extends javax.swing.JPanel {
             int i = jTable2.getSelectedRow();
             jTextField_numeleve.setText(jTable2.getModel().getValueAt(i, 0).toString());
             jTextField_numeleve.setEditable(false);
+
             jComboBox_numecole.setSelectedItem(jTable2.getModel().getValueAt(i, 1).toString());
-            jComboBox_numecole.setEnabled(false);
-            jTextField_nom.setText(jTable2.getModel().getValueAt(i, 2).toString());
+            jComboBox_numecole.setEnabled(false);       
+           jTextField_nom.setText(jTable2.getModel().getValueAt(i, 2).toString());
             jTextField_prenom.setText(jTable2.getModel().getValueAt(i, 3).toString());
             route.Route(this, jPanel2);
             jButton_action.setText("Modifier");
@@ -433,6 +478,30 @@ public class EleveVues extends javax.swing.JPanel {
         System.out.println(input_search.getText());
     }//GEN-LAST:event_input_searchActionPerformed
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+         jTable2.setModel(eleveTraitement.liste());
+      System.out.println("Hello3");
+        jComboBox_numecole.setModel(model);
+         jComboBox_numecole.setModel(eleveTraitement.selection());
+    }//GEN-LAST:event_formMouseClicked
+
+    private void jPanel2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel2AncestorAdded
+        // TODO add your handling code here:
+       /*  jTable2.setModel(eleveTraitement.liste());
+      System.out.println("Hello2");
+        jComboBox_numecole.setModel(model);
+        */
+    }//GEN-LAST:event_jPanel2AncestorAdded
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        // TODO add your handling code here:
+      /*  System.out.println("Hello");
+          jTable2.setModel(eleveTraitement.liste());
+      */
+        jComboBox_numecole.setModel(eleveTraitement.selection());
+    }//GEN-LAST:event_jPanel2MouseClicked
+
     public void search(){
         
         
@@ -454,8 +523,10 @@ public class EleveVues extends javax.swing.JPanel {
         });
     }
     public static void updateData(){
-       jComboBox_numecole.setModel(eleveTraitement.selection());
+       //jComboBox_numecole.setModel(eleveTraitement.selection());
+        model = eleveTraitement.selection();
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField input_search;
     private javax.swing.JButton jButton1;
@@ -464,7 +535,7 @@ public class EleveVues extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton_action;
     private javax.swing.JButton jButton_back;
-    private static javax.swing.JComboBox<String> jComboBox_numecole;
+    private javax.swing.JComboBox<String> jComboBox_numecole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

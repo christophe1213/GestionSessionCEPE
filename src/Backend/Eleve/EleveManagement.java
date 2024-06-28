@@ -29,7 +29,7 @@ public class EleveManagement extends Crud
             //les colones
             String[] colonnes={"num Eleve","Ecole","Nom","Prenom"};
             String[] line={"numeleve","numecole","nom","prenom"};
-            return super.liste("select * from eleve;", line,colonnes);
+            return super.liste("select * from eleve order by nom asc;", line,colonnes);
                 
     }
     
@@ -65,14 +65,14 @@ public class EleveManagement extends Crud
      }
      public DefaultComboBoxModel selection(){
             String[] line={"numEcole"};
-            String query="SELECT numecole from ecole;";
-            return super.selection(query, "numEcole"); 
+            String query="SELECT numecole from ecole order by numecole ASC;";
+            return super.selection(query, line); 
       }
      public  DefaultTableModel search(String eleve){
            String[] colonnes={"num Eleve","Ecole","Nom","Prenom"};
            String[] line={"numeleve","ecole","nom","prenom"};
            System.out.println("fdf");
-           return super.liste("select * from eleve where nom LIKE '%"+eleve+"%' or prenom LIKE '%"+eleve+"%'  ;", line,colonnes);
+           return super.liste("select * from eleve where nom ILIKE '%"+eleve+"%' or prenom ILIKE '%"+eleve+"%'  ;", line,colonnes);
                  
      }
      public DefaultTableModel Resultat(){
@@ -81,6 +81,7 @@ public class EleveManagement extends Crud
             String query="select eleve.numeleve,eleve.nom,eleve.prenom,ecole.design, TO_CHAR(SUM(coef * note) / SUM(coef)::float, 'FM999999990.00') as Moyenne from note,matiere,eleve,ecole where "
                     + "   eleve.numeleve=note.numeleve and matiere.nummat=note.nummat and eleve.numecole = ecole.numecole "
                     + "   group by note.numeleve,eleve.numeleve,eleve.nom,eleve.prenom,ecole.design having sum(coef*note)/sum(coef)::float>9.75 order by Moyenne desc;";
+            
             return super.liste(query, line, colonnes);
      }
      public DefaultTableModel EleveEchec(){

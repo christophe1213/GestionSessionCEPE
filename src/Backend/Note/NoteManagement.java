@@ -19,7 +19,7 @@ public class NoteManagement extends Crud {
             //les colones
             String[] colonnes={"num Elève","numéro matiere","anné scolaire","note"};
             String[] line={"numeleve","nummat","annescolaire","note"};
-            return super.liste("SELECT * FROM note order by numeleve asc  ;", line,colonnes);
+            return super.liste("SELECT * FROM note order by numeleve,nummat asc  ;", line,colonnes);
                 
     }
     
@@ -59,13 +59,14 @@ public class NoteManagement extends Crud {
         
      }
           public DefaultComboBoxModel selectionEleve(){
+            String[] line={"numeleve"}; 
             String query="SELECT numeleve from eleve;";
-            return super.selection(query, "numeleve"); 
+            return super.selection(query, line); 
       }
         public DefaultComboBoxModel selectionMat(){
-       
-            String query="SELECT nummat from matiere;";
-            return super.selection(query, "nummat"); 
+            String[] line={"nummmat"}; 
+            String query="SELECT nummat from matiere order by nummat ASC;";
+            return super.selection(query, line); 
       }
      
     

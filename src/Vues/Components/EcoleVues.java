@@ -7,6 +7,7 @@ import Backend.Ecole.Ecole;
 //VUES
 import Vues.Components.table.TableCustom;
 import Vues.Components.EleveVues;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -15,6 +16,7 @@ public class EcoleVues extends javax.swing.JPanel {
     private EcoleManager ecoleTraitement = new EcoleManager();
     private Ecole ecole = new Ecole();
     private Routeur route = new Routeur();
+    public static DefaultComboBoxModel<String> model = new DefaultComboBoxModel();
     public EcoleVues() {
         initComponents();
         init();
@@ -229,6 +231,22 @@ public class EcoleVues extends javax.swing.JPanel {
     public void init(){
         jTable1.setModel(ecoleTraitement.liste());
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        btn_ajout.setBackground(Asset.theme);
+        btn_ajout.setFont(Asset.fontBtn);
+        btn_ajout.setForeground(Asset.ColorText);
+        btn_delete.setBackground(Asset.theme);
+        btn_delete.setFont(Asset.fontBtn);
+        btn_delete.setForeground(Asset.ColorText);
+        btn_update.setBackground(Asset.theme);
+        btn_update.setFont(Asset.fontBtn);
+        btn_update.setForeground(Asset.ColorText);
+        jButton2.setBackground(Asset.theme);
+        jButton2.setFont(Asset.fontBtn);
+        jButton2.setForeground(Asset.ColorText);
+        jButton4.setBackground(Asset.theme);
+        jButton4.setForeground(Asset.ColorText);
+        jButton4.setFont(Asset.fontBtn);
+        
     }
     private void btn_ajoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajoutActionPerformed
         // TODO add your handling code here:
@@ -237,6 +255,7 @@ public class EcoleVues extends javax.swing.JPanel {
         jTextField_adresse.setText("");
         jTextField_design.setText("");
         jButton2.setText("Ajouter");
+        
         jLabel_action.setText("Insertion école");
         jTextField_numecole.setEditable(true);
         route.Route(this, jPanel_upddate);
@@ -288,14 +307,21 @@ public class EcoleVues extends javax.swing.JPanel {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code her
-        route.Route(this,jPanel_upddate);
-        jButton2.setText("Modifier");
-        jLabel_action.setText("Modification d'une ecole");
-        int i = jTable1.getSelectedRow();
-        jTextField_numecole.setText(jTable1.getModel().getValueAt(i, 0).toString());
-        jTextField_numecole.setEditable(false);
-        jTextField_design.setText(jTable1.getModel().getValueAt(i, 1).toString());
-        jTextField_adresse.setText(jTable1.getModel().getValueAt(i, 2).toString());
+        try{
+            
+            jButton2.setText("Modifier");
+            jLabel_action.setText("Modification d'une ecole");
+            int i = jTable1.getSelectedRow();
+            jTextField_numecole.setText(jTable1.getModel().getValueAt(i, 0).toString());
+            jTextField_numecole.setEditable(false);
+            jTextField_design.setText(jTable1.getModel().getValueAt(i, 1).toString());
+            jTextField_adresse.setText(jTable1.getModel().getValueAt(i, 2).toString());
+            route.Route(this,jPanel_upddate);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Veuillez selectioner avant modifier");
+            System.out.println(e);
+        }
+      
        
     }//GEN-LAST:event_btn_updateActionPerformed
 

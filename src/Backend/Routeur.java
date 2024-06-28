@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class Routeur {
     
   
-    public void Routage(JPanel parent, String r,JPanel[] menu){
+    public  void Routage(JPanel parent, String r,JPanel[] menu){
         
          if(r!=" "){
             

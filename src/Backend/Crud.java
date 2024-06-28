@@ -19,11 +19,11 @@ import javax.swing.DefaultComboBoxModel;
  */
  public class Crud {
     
-      protected  Connection con ;
-      protected  PreparedStatement ps ;
-      protected String url = "jdbc:postgresql://localhost:5432/gestion_session_cepe";
-      protected String utilisateur = "postgres";
-      protected String motDePasse = "azerty";
+      protected static  Connection con ;
+      protected static PreparedStatement ps ;
+      protected static String url = "jdbc:postgresql://localhost:5432/gestion_session_cepe";
+      protected static String utilisateur = "postgres";
+      protected static String motDePasse = "azerty";
       
       
       public  DefaultTableModel  liste(String q,String l[],String c[])
@@ -85,16 +85,42 @@ import javax.swing.DefaultComboBoxModel;
         }
           return update;
       }
-    public DefaultComboBoxModel selection(String q,String l){
+    public DefaultComboBoxModel selection(String q,String l[]){
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel();
         try{
             
-                 con = DriverManager.getConnection(url, utilisateur, motDePasse);
-                 Statement statement = con.createStatement();
-                 ResultSet resultSet = statement.executeQuery(q);
+                con = DriverManager.getConnection(url, utilisateur, motDePasse);
+                Statement statement = con.createStatement();
+                ResultSet resultSet = statement.executeQuery(q);
+                if(l.length==1) 
+                 while(resultSet.next()){
+                    
+                     model.addElement(resultSet.getString(1));
+                  }
+                else if(l.length==2) 
+                    while(resultSet.next()){
+                    
+                     model.addElement(resultSet.getString(1)+"-"+resultSet.getString(2));
+                  }
+                    con.close();
+                
+              } catch (SQLException e) {
+                   System.out.println("Échec de combo box");
+                   e.printStackTrace();
+               }
+        
+        return model; 
+      }
+    public static void validation(String q, String l,String valid){
+        boolean trouve=false;
+        try{
+                
+                con = DriverManager.getConnection(url, utilisateur, motDePasse);
+                Statement statement = con.createStatement();
+                ResultSet resultSet = statement.executeQuery(q);
                     
                  while(resultSet.next()){
-                     model.addElement(resultSet.getString(l));
+                        if(valid==resultSet.getString(0))trouve=true;
                   }
                     con.close();
     
@@ -103,7 +129,5 @@ import javax.swing.DefaultComboBoxModel;
                    e.printStackTrace();
                }
         
-        return model; 
-      }
-      
+    }
 }

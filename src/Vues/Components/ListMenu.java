@@ -7,10 +7,6 @@ package Vues.Components;
 import java.awt.Color;
 import javax.swing.JList;
 
-/**
- *
- * @author Thierry Christophe
- */
 public class ListMenu extends JList {
     
     public ListMenu(){
